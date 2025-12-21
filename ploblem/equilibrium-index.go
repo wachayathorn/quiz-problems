@@ -22,3 +22,25 @@ func EquilibriumIndex(nums []int) int {
 	}
 	return -1
 }
+
+func EquilibriumIndexOptimized(nums []int) int {
+	totalSum := 0
+	for _, num := range nums {
+		totalSum += num
+	}
+
+	leftSum := 0
+	for i, num := range nums {
+		// Right Sum คำนวณได้จาก: ผลรวมทั้งหมด - ผลรวมทางซ้าย - ตัวมันเอง
+		rightSum := totalSum - leftSum - num
+
+		if leftSum == rightSum {
+			return i
+		}
+
+		// เตรียมค่า leftSum สำหรับ Index ถัดไป
+		leftSum += num
+	}
+
+	return -1
+}
