@@ -18,9 +18,10 @@ func LeadersInAnArray(nums []int) []int {
 	}
 
 	// Reverse the result slice to maintain original order
-	for i, j := 0, len(result)-1; i < j; i, j = i+1, j-1 {
-		result[i], result[j] = result[j], result[i]
+	var resultReversed []int = make([]int, len(result))
+	for i, v := range result {
+		resultReversed[len(result)-1-i] = v
 	}
 
-	return result
+	return resultReversed
 }
