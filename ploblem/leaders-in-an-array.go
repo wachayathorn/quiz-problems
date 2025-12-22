@@ -1,25 +1,25 @@
 package ploblem
 
 func LeadersInAnArray(nums []int) []int {
-	var (
-		result []int
-		sum    int
-	)
-
-	for _, num := range nums {
-		sum += num
+	n := len(nums)
+	if n == 0 {
+		return []int{}
 	}
 
-	for i := 0; i < len(nums); i++ {
-		currentNum := nums[i]
+	result := []int{}
+	maxRight := nums[n-1]
+	result = append(result, maxRight)
 
-		suffixMaximum := sum - currentNum
-
-		if suffixMaximum/currentNum == 0 {
-			result = append(result, currentNum)
+	for i := n - 2; i >= 0; i-- {
+		if nums[i] >= maxRight {
+			maxRight = nums[i]
+			result = append(result, maxRight)
 		}
+	}
 
-		sum -= currentNum
+	// Reverse the result slice to maintain original order
+	for i, j := 0, len(result)-1; i < j; i, j = i+1, j-1 {
+		result[i], result[j] = result[j], result[i]
 	}
 
 	return result
