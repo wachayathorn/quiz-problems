@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/wachayathorn/quiz-problems/ploblem"
 )
 
 func main() {
-	fmt.Println(ploblem.MinimumPlatformsRequired([]int{1000, 935, 1100}, []int{1200, 1240, 1130}))
+	ploblem.ArrayRotations([]int{1, 2, 3, 4, 5, 6}, 2)
 }
