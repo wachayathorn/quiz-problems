@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Println(ploblem.EquilibriumIndex([]int{1, 7, 3, 6, 5, 6}))
+	fmt.Println(ploblem.MinimumPlatformsRequired([]int{1000, 935, 1100}, []int{1200, 1240, 1130}))
 }
