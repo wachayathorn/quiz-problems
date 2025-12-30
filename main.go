@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/wachayathorn/quiz-problems/ploblem"
 )
 
 func main() {
-	ploblem.ArrayRotations([]int{1, 2, 3, 4, 5, 6}, 2)
+	fmt.Println(ploblem.KSmallestElement([]int{10, 5, 4, 3, 48, 6, 2, 33, 53, 10}, 4))
 }
