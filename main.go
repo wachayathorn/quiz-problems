@@ -7,5 +7,7 @@ import (
 )
 
 func main() {
-	fmt.Println(ploblem.MaximumLengthBitonicSubarray([]int{12, 4, 78, 90, 45, 23}))
+	num := 246
+	result := ploblem.ReorderedPowerOf2(num)
+	fmt.Printf("Can %d be reordered to form a power of 2? %v\n", num, result)
 }
