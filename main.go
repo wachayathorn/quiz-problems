@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Println(ploblem.MaximumLengthBitonicSubarray([]int{12, 4, 78, 90, 45, 23}))
+	fmt.Println(ploblem.ModifyString("?"))
 }
