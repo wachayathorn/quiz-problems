@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Println(ploblem.ModifyString("?"))
+	fmt.Println(ploblem.MaxFreqSum("aeiaeia"))
 }
