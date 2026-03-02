@@ -1,0 +1,17 @@
+package ploblem
+
+// nums = [1,2,3,4]
+// Output: 21
+// Explanation: There are exactly 3 special elements in nums: nums[1] since 1 divides 4, nums[2] since 2 divides 4, and nums[4] since 4 divides 4.
+// Hence, the sum of the squares of all special elements of nums is nums[1] * nums[1] + nums[2] * nums[2] + nums[4] * nums[4] = 1 * 1 + 2 * 2 + 4 * 4 = 21.
+func SumOfSquares(nums []int) int {
+	n := len(nums)
+	sum := 0
+	for i, num := range nums {
+		j := i + 1
+		if n%j == 0 {
+			sum += (num * num)
+		}
+	}
+	return sum
+}

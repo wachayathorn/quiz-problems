@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Println(ploblem.WonderfulSubstrings("aba"))
+	fmt.Println(ploblem.SumOfSquares([]int{1, 2, 3, 4}))
 }
