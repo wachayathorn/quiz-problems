@@ -1,44 +1,29 @@
 package ploblem
 
-import "strings"
-
-// Input: word = "aabb"
-// Output: 9
-// Explanation: The nine wonderful substrings are underlined below:
-// - "aabb" -> "a"
-// - "aabb" -> "aa"
-// - "aabb" -> "aab"
-// - "aabb" -> "aabb"
-// - "aabb" -> "a"
-// - "aabb" -> "abb"
-// - "aabb" -> "b"
-// - "aabb" -> "bb"
-// - "aabb" -> "b"
 func WonderfulSubstrings(word string) int64 {
-	result := 0
-	chars := strings.Split(word, "")
-	for _, c := range chars {
-		alphabet := make(map[string]int)
-		swicth, isExisting := alphabet[c]
-		if !isExisting {
-			alphabet[c] = 0
-		}
+	var result int64 = 0
+	n := len(word)
 
-		if swicth == 0 {
-			alphabet[c] = 1
-		} else {
-			alphabet[c] = 0
-		}
+	for i := 0; i < n; i++ {
+		alphabet := make([]int, 10)
+		oddCount := 0
 
-		sum := 0
-		for _, a := range alphabet {
-			sum += a
-		}
+		for j := i; j < n; j++ {
+			charIdx := word[j] - 'a'
 
-		if sum <= 1 {
-			result++
+			if alphabet[charIdx] == 0 {
+				alphabet[charIdx] = 1
+				oddCount++ // ไฟดวงนี้สว่างขึ้นมา
+			} else {
+				alphabet[charIdx] = 0
+				oddCount-- // ไฟดวงนี้ดับลง
+			}
+
+			if oddCount <= 1 {
+				result++
+			}
 		}
 	}
 
-	return int64(result)
+	return result
 }
