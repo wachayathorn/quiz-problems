@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Println(ploblem.RemoveDuplicateLetters("cbacdcbc"))
+	fmt.Println(ploblem.RemoveDuplicateLetters("bcabc"))
 }
