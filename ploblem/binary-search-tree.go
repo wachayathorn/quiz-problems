@@ -1,7 +1,6 @@
 package ploblem
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -31,8 +30,6 @@ func (n *Node) Search(v int) bool {
 	if n == nil {
 		return false
 	}
-
-	fmt.Printf("กำลังเช็กที่ Node: %d\n", n.Value)
 
 	if v == n.Value {
 		return true
