@@ -4,8 +4,47 @@ import (
 	"slices"
 )
 
-// [4,5,6,4,2] , o = 20
-// expect = 110
+func MaxProfitV2(inventory []int, orders int) int {
+	const MOD = 1_000_000_007
+	slices.SortFunc(inventory, func(a, b int) int { return b - a })
+	inventory = append(inventory, 0)
+
+	profit := int64(0)
+	n := len(inventory)
+
+	for i := 0; i < n-1; i++ {
+		if inventory[i] > inventory[i+1] {
+			count := int64(i + 1)
+			diff := int64(inventory[i] - inventory[i+1])
+			canSell := count * diff
+
+			if int64(orders) >= canSell {
+				first := int64(inventory[i])
+				last := int64(inventory[i+1] + 1)
+				numRows := diff
+
+				currentSum := (first + last) * numRows / 2
+				profit = (profit + currentSum*count) % MOD
+				orders -= int(canSell)
+			} else {
+				numFullRows := int64(orders) / count
+				rem := int64(orders) % count
+
+				first := int64(inventory[i])
+				last := first - numFullRows + 1
+
+				currentSum := (first + last) * numFullRows / 2
+				profit = (profit + currentSum*count) % MOD
+
+				profit = (profit + (last-1)*rem) % MOD
+				orders = 0
+				break
+			}
+		}
+	}
+	return int(profit)
+}
+
 func MaxProfit(inventories []int, orders int) int {
 	const MOD = 1_000_000_007
 

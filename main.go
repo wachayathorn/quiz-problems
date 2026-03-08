@@ -26,4 +26,9 @@ func main() {
 	if result != 21 {
 		log.Fatalf("case 4 fail got : %d", result)
 	}
+
+	result = ploblem.MaxProfit([]int{497978859, 167261111, 483575207, 591815159}, 836556809)
+	if result != 373219333 {
+		log.Fatalf("case 5 fail got : %d", result)
+	}
 }
