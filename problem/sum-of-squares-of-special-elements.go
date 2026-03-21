@@ -1,4 +1,4 @@
-package ploblem
+package problem
 
 // nums = [1,2,3,4]
 // Output: 21

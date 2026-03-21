@@ -1,4 +1,4 @@
-package ploblem
+package problem
 
 func FindMissingNumber(nums []int) int {
 	newNums := nums

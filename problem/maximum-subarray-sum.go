@@ -1,4 +1,4 @@
-package ploblem
+package problem
 
 import "math"
 

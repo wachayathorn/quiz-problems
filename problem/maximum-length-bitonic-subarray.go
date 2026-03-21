@@ -1,4 +1,4 @@
-package ploblem
+package problem
 
 func MaximumLengthBitonicSubarray(arr []int) int {
 	length := len(arr)

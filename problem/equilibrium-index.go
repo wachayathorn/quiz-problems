@@ -1,4 +1,4 @@
-package ploblem
+package problem
 
 func EquilibriumIndex(nums []int) int {
 	for i := range nums {

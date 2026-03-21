@@ -3,32 +3,32 @@ package main
 import (
 	"log"
 
-	"github.com/wachayathorn/quiz-problems/ploblem"
+	"github.com/wachayathorn/quiz-problems/problem"
 )
 
 func main() {
-	result := ploblem.MaxProfit([]int{2, 5}, 4)
-	if result != 14 {
-		log.Fatalf("case 1 fail got : %d", result)
+	result := problem.LongestCommonSubsequence("cat", "crabt")
+	if result != 3 {
+		log.Fatalf("case 1 error got : %d", result)
 	}
 
-	result = ploblem.MaxProfit([]int{3, 5}, 6)
-	if result != 19 {
-		log.Fatalf("case 2 fail got : %d", result)
+	result = problem.LongestCommonSubsequence("abcd", "abcd")
+	if result != 4 {
+		log.Fatalf("case 2 error got : %d", result)
 	}
 
-	result = ploblem.MaxProfit([]int{2, 8, 4, 10, 6}, 20)
-	if result != 110 {
-		log.Fatalf("case 3 fail got : %d", result)
+	result = problem.LongestCommonSubsequence("abcd", "efgh")
+	if result != 0 {
+		log.Fatalf("case 3 error got : %d", result)
 	}
 
-	result = ploblem.MaxProfit([]int{1000000000}, 1000000000)
-	if result != 21 {
-		log.Fatalf("case 4 fail got : %d", result)
+	result = problem.LongestCommonSubsequence("crabt", "car")
+	if result != 2 {
+		log.Fatalf("case 4 error got : %d", result)
 	}
 
-	result = ploblem.MaxProfit([]int{497978859, 167261111, 483575207, 591815159}, 836556809)
-	if result != 373219333 {
-		log.Fatalf("case 5 fail got : %d", result)
+	result = problem.LongestCommonSubsequence("bsbininm", "jmjkbkjkv")
+	if result != 1 {
+		log.Fatalf("case 4 error got : %d", result)
 	}
 }

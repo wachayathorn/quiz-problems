@@ -1,4 +1,4 @@
-package ploblem
+package problem
 
 func LeadersInAnArray(nums []int) []int {
 	n := len(nums)

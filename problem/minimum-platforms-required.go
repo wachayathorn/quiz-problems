@@ -1,4 +1,4 @@
-package ploblem
+package problem
 
 func MinimumPlatformsRequired(arr, dep []int) int {
 	trains := len(arr)
