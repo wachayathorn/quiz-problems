@@ -1,4 +1,4 @@
-package problem
+package strings
 
 func WonderfulSubstrings(word string) int64 {
 	var result int64 = 0

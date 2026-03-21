@@ -1,4 +1,4 @@
-package problem
+package greedy_heaps
 
 func MinimumPlatformsRequired(arr, dep []int) int {
 	trains := len(arr)

@@ -1,4 +1,4 @@
-package problem
+package arrays_hashing
 
 import (
 	"fmt"

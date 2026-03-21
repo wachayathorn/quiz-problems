@@ -1,4 +1,4 @@
-package problem
+package dynamic_programming
 
 func MaximumLengthBitonicSubarray(arr []int) int {
 	length := len(arr)

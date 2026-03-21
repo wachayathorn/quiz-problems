@@ -1,4 +1,4 @@
-package problem
+package greedy_heaps
 
 import (
 	"slices"

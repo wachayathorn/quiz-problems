@@ -1,4 +1,4 @@
-package problem
+package arrays_hashing
 
 func FindMissingNumber(nums []int) int {
 	newNums := nums

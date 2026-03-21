@@ -1,4 +1,4 @@
-package problem
+package arrays_hashing
 
 func EquilibriumIndex(nums []int) int {
 	for i := range nums {

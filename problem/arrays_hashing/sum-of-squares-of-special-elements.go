@@ -1,4 +1,4 @@
-package problem
+package arrays_hashing
 
 // nums = [1,2,3,4]
 // Output: 21

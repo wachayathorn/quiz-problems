@@ -1,4 +1,4 @@
-package problem
+package math
 
 import (
 	"sort"

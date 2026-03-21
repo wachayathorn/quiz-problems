@@ -1,4 +1,4 @@
-package problem
+package arrays_hashing
 
 func LeadersInAnArray(nums []int) []int {
 	n := len(nums)

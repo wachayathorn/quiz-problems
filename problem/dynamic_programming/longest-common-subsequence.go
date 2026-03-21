@@ -1,4 +1,4 @@
-package problem
+package dynamic_programming
 
 import (
 	"math"
