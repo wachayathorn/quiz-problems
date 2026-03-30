@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/wachayathorn/quiz-problems/problem/trees"
+	"github.com/wachayathorn/quiz-problems/problem/arrays_hashing"
 )
 
 func main() {
-	fmt.Println(trees.LevelOrder([]int{1, 2, 3, 4, 5, 6, 7}))
+	fmt.Println(arrays_hashing.TwoSum([]int{4, 5, 6}, 10))
 }
