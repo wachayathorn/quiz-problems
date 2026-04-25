@@ -1,3 +1,3 @@
 module github.com/wachayathorn/quiz-problems
 
-go 1.25.4
+go 1.26.0
