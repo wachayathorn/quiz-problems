@@ -6,7 +6,7 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func (t *TreeNode) insert(v int) {
+func (t *TreeNode) insertCompletedTree(v int) {
 	// Insert in level-order (complete tree insert):
 	// find first node that has a missing child (left first, then right)
 	queue := []*TreeNode{t}
@@ -25,6 +25,23 @@ func (t *TreeNode) insert(v int) {
 		}
 		queue = append(queue, cur.Right)
 	}
+}
+
+func (t *TreeNode) print() []*int {
+	result := []*int{}
+	queue := []*TreeNode{t}
+	for len(queue) > 0 {
+		node := queue[0]
+		queue = queue[1:]
+		result = append(result, &node.Val)
+		if node.Left != nil {
+			queue = append(queue, node.Left)
+		}
+		if node.Right != nil {
+			queue = append(queue, node.Right)
+		}
+	}
+	return result
 }
 
 func levelOrder(root *TreeNode) [][]int {
@@ -74,7 +91,7 @@ func LevelOrder(treeValues []int) [][]int {
 	}
 	root := &TreeNode{Val: treeValues[0]}
 	for i := 1; i < len(treeValues); i++ {
-		root.insert(treeValues[i])
+		root.insertCompletedTree(treeValues[i])
 	}
 	return levelOrder(root)
 }

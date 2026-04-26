@@ -7,6 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Println(trees.KthSmallest([]int{4, 3, 5, 2, 0}, 4))
-	fmt.Println(trees.KthSmallest([]int{2, 1, 3}, 1))
+	fmt.Println(trees.InvertTree([]int{1, 2}))
 }
