@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/wachayathorn/quiz-problems/problem/trees"
+	"github.com/wachayathorn/quiz-problems/problem/strings"
 )
 
 func main() {
-	fmt.Println(trees.InvertTree([]int{1, 2}))
+	fmt.Println(strings.IsValid("()[]{}"))
 }
