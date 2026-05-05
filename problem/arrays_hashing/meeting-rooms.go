@@ -14,34 +14,10 @@ func CanAttendMeetings(intervals []Interval) bool {
 	slices.SortFunc(intervals, func(a, b Interval) int {
 		return cmp.Compare(a.Start, b.Start)
 	})
-
-	lastStart := -1
-	for _, in := range intervals {
-		if lastStart == -1 {
-			lastStart = in.Start
-			continue
-		}
-
-		if lastStart >= in.Start {
+	for i := 1; i < len(intervals); i++ {
+		if intervals[i].Start < intervals[i-1].End {
 			return false
 		}
-
-		lastStart = in.Start
 	}
-
-	lastEnd := -1
-	for _, in := range intervals {
-		if lastEnd == -1 {
-			lastEnd = in.End
-			continue
-		}
-
-		if lastEnd >= in.End || lastEnd > in.Start {
-			return false
-		}
-
-		lastEnd = in.End
-	}
-
 	return true
 }
