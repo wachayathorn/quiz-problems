@@ -36,12 +36,12 @@ type PaymentProcessor struct {
 	strategy PaymentStrategy
 }
 
-func (p *PaymentProcessor) ProcessPayment(amount int) error {
-	return p.strategy.Pay(amount)
-}
-
 func NewPaymentProcessor(strategy PaymentStrategy) *PaymentProcessor {
 	return &PaymentProcessor{strategy: strategy}
+}
+
+func (p *PaymentProcessor) ProcessPayment(amount int) error {
+	return p.strategy.Pay(amount)
 }
 
 func (p *PaymentProcessor) SetStrategy(strategy PaymentStrategy) {
