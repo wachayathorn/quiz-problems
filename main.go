@@ -1,11 +1,11 @@
 package main
 
-import "github.com/wachayathorn/quiz-problems/design"
+import "github.com/wachayathorn/quiz-problems/design/builder"
 
 func main() {
-	design.NewHttpRequest().
+	builder.NewHTTPRequest().
 		SetMethod("GET").
-		SetUrl("https://example.com").
+		SetURL("https://example.com").
 		SetHeaders(map[string]string{
 			"Authorization": "Bearer 1234567890",
 		}).

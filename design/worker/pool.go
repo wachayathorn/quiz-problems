@@ -1,4 +1,4 @@
-package design
+package worker
 
 import (
 	"fmt"
@@ -8,30 +8,30 @@ import (
 )
 
 type Job struct {
-	Id  int
-	Url string
+	ID  int
+	URL string
 }
 
 type Result struct {
-	JobId      int
-	Url        string
+	JobID      int
+	URL        string
 	StatusCode int
 	Err        error
 }
 
-func main() {
+func RunPool() {
 	jobs := make(chan Job)
 	results := make(chan Result)
 
 	var wg sync.WaitGroup
 
-	for i := 1; i <= 3; i++ {
+	for range 3 {
 		wg.Add(1)
-		go worker(jobs, results, &wg)
+		go poolWorker(jobs, results, &wg)
 	}
 
-	go func() { // Producer goroutine
-		urls := [15]string{
+	go func() {
+		urls := []string{
 			"https://httpbin.org/status/200",
 			"https://httpbin.org/status/404",
 			"https://httpbin.org/status/500",
@@ -50,7 +50,7 @@ func main() {
 		}
 
 		for i, url := range urls {
-			jobs <- Job{Id: i + 1, Url: url}
+			jobs <- Job{ID: i + 1, URL: url}
 		}
 		close(jobs)
 	}()
@@ -60,23 +60,20 @@ func main() {
 		close(results)
 	}()
 
-	for result := range results { // Main consumes results
-		fmt.Printf("job-%d %s → %d\n", result.JobId, result.Url, result.StatusCode)
+	for result := range results {
+		fmt.Printf("job-%d %s → %d\n", result.JobID, result.URL, result.StatusCode)
 	}
-
-	fmt.Println("Main ended")
 }
 
-func worker(jobs <-chan Job, results chan<- Result, wg *sync.WaitGroup) {
+func poolWorker(jobs <-chan Job, results chan<- Result, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for job := range jobs {
-		tp := strings.Split(job.Url, "/")
-		statusCode, _ := strconv.Atoi(tp[len(tp)-1])
+		parts := strings.Split(job.URL, "/")
+		statusCode, _ := strconv.Atoi(parts[len(parts)-1])
 		results <- Result{
-			JobId:      job.Id,
-			Url:        job.Url,
+			JobID:      job.ID,
+			URL:        job.URL,
 			StatusCode: statusCode,
 		}
 	}
-	fmt.Println("G ended")
 }

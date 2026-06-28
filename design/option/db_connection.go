@@ -1,4 +1,4 @@
-package design
+package option
 
 import (
 	"errors"
@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type DBConfig struct {
+type dbConfig struct {
 	host            string
 	port            int
 	user            string
@@ -18,68 +18,50 @@ type DBConfig struct {
 	connMaxLifetime time.Duration
 }
 
-type DBOption func(*DBConfig)
+type DBOption func(*dbConfig)
 
 func WithHost(host string) DBOption {
-	return func(c *DBConfig) {
-		c.host = host
-	}
+	return func(c *dbConfig) { c.host = host }
 }
 
 func WithPort(port int) DBOption {
-	return func(c *DBConfig) {
-		c.port = port
-	}
+	return func(c *dbConfig) { c.port = port }
 }
 
 func WithUser(user string) DBOption {
-	return func(c *DBConfig) {
-		c.user = user
-	}
+	return func(c *dbConfig) { c.user = user }
 }
 
 func WithPassword(password string) DBOption {
-	return func(c *DBConfig) {
-		c.password = password
-	}
+	return func(c *dbConfig) { c.password = password }
 }
 
 func WithDBName(dbName string) DBOption {
-	return func(c *DBConfig) {
-		c.dbName = dbName
-	}
+	return func(c *dbConfig) { c.dbName = dbName }
 }
 
 func WithSSLMode(mode string) DBOption {
-	return func(c *DBConfig) {
-		c.sslMode = mode
-	}
+	return func(c *dbConfig) { c.sslMode = mode }
 }
 
 func WithMaxOpenConns(n int) DBOption {
-	return func(c *DBConfig) {
-		c.maxOpenConns = n
-	}
+	return func(c *dbConfig) { c.maxOpenConns = n }
 }
 
 func WithMaxIdleConns(n int) DBOption {
-	return func(c *DBConfig) {
-		c.maxIdleConns = n
-	}
+	return func(c *dbConfig) { c.maxIdleConns = n }
 }
 
 func WithConnMaxLifetime(d time.Duration) DBOption {
-	return func(c *DBConfig) {
-		c.connMaxLifetime = d
-	}
+	return func(c *dbConfig) { c.connMaxLifetime = d }
 }
 
 type DBConnection struct {
-	config DBConfig
+	config dbConfig
 }
 
 func NewDBConnection(opts ...DBOption) (*DBConnection, error) {
-	cfg := DBConfig{
+	cfg := dbConfig{
 		host:            "localhost",
 		port:            5432,
 		sslMode:         "disable",
@@ -115,7 +97,6 @@ func (c *DBConnection) DSN() string {
 }
 
 func (c *DBConnection) Connect() error {
-	// simulate connection — in production: sql.Open("postgres", c.DSN())
 	return nil
 }
 

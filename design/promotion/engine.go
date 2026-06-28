@@ -1,4 +1,4 @@
-package design
+package promotion
 
 type CartItem struct {
 	SKU      string
@@ -13,13 +13,12 @@ type Promotion struct {
 	MaxDiscount int
 }
 
-func calculateFinalPrice(items []CartItem, promo Promotion) int {
+func CalculateFinalPrice(items []CartItem, promo Promotion) int {
 	totalPrice := 0
 	for _, item := range items {
 		if item.Price <= 0 || item.Quantity <= 0 {
 			continue
 		}
-
 		totalPrice += item.Price * item.Quantity
 	}
 

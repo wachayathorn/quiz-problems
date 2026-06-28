@@ -1,18 +1,22 @@
-package design
+package facade
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/wachayathorn/quiz-problems/design/factory"
+)
 
 type CheckoutRequest struct {
-	PaymentType PaymentType
-	Amount      int
-	OrderID     string
-	UserEmail   string
+	Provider  factory.ProviderType
+	Amount    int
+	OrderID   string
+	UserEmail string
 }
 
 type CheckoutResult struct {
 	OrderID     string
 	Transaction string
-	Provider    PaymentType
+	Provider    factory.ProviderType
 }
 
 type orderValidator struct{}
@@ -29,7 +33,7 @@ func (v *orderValidator) validate(req CheckoutRequest) error {
 
 type transactionRecorder struct{}
 
-func (r *transactionRecorder) record(orderID string, provider PaymentType, amount int) string {
+func (r *transactionRecorder) record(orderID string, provider factory.ProviderType) string {
 	return "txn_" + orderID + "_" + string(provider)
 }
 
@@ -43,15 +47,15 @@ func (n *paymentNotifier) notify(email, orderID string) error {
 }
 
 type PaymentFacade struct {
-	factory   *PaymentFactory
+	factory   *factory.PaymentFactory
 	validator *orderValidator
 	recorder  *transactionRecorder
 	notifier  *paymentNotifier
 }
 
-func NewPaymentFacade(config PaymentConfig) *PaymentFacade {
+func NewPaymentFacade(config factory.GatewayConfig) *PaymentFacade {
 	return &PaymentFacade{
-		factory:   NewPaymentFactory(config),
+		factory:   factory.NewPaymentFactory(config),
 		validator: &orderValidator{},
 		recorder:  &transactionRecorder{},
 		notifier:  &paymentNotifier{},
@@ -63,16 +67,16 @@ func (f *PaymentFacade) Checkout(req CheckoutRequest) (*CheckoutResult, error) {
 		return nil, err
 	}
 
-	payment, err := f.factory.CreatePayment(req.PaymentType)
+	gateway, err := f.factory.Create(req.Provider)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := payment.Pay(req.Amount); err != nil {
+	if err := gateway.Pay(req.Amount); err != nil {
 		return nil, err
 	}
 
-	txnID := f.recorder.record(req.OrderID, payment.Provider(), req.Amount)
+	txnID := f.recorder.record(req.OrderID, gateway.Provider())
 
 	if err := f.notifier.notify(req.UserEmail, req.OrderID); err != nil {
 		return nil, err
@@ -81,6 +85,6 @@ func (f *PaymentFacade) Checkout(req CheckoutRequest) (*CheckoutResult, error) {
 	return &CheckoutResult{
 		OrderID:     req.OrderID,
 		Transaction: txnID,
-		Provider:    payment.Provider(),
+		Provider:    gateway.Provider(),
 	}, nil
 }

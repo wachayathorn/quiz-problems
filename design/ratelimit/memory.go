@@ -1,4 +1,4 @@
-package design
+package ratelimit
 
 import (
 	"sync"
@@ -12,12 +12,11 @@ type RateLimiter struct {
 	mu       sync.Mutex
 }
 
-func New() *RateLimiter {
+func NewRateLimiter(limit int, window time.Duration) *RateLimiter {
 	return &RateLimiter{
-		limit:    3,
-		window:   1 * time.Minute,
+		limit:    limit,
+		window:   window,
 		requests: make(map[string][]time.Time),
-		mu:       sync.Mutex{},
 	}
 }
 
@@ -27,7 +26,6 @@ func (r *RateLimiter) Allow(userID string) bool {
 
 	now := time.Now()
 
-	// Clean up old requests outside the window
 	for i := range r.requests[userID] {
 		if now.Sub(r.requests[userID][i]) > r.window {
 			r.requests[userID] = r.requests[userID][i+1:]
@@ -35,7 +33,6 @@ func (r *RateLimiter) Allow(userID string) bool {
 		}
 	}
 
-	// Check if under limit
 	if len(r.requests[userID]) < r.limit {
 		r.requests[userID] = append(r.requests[userID], now)
 		return true
