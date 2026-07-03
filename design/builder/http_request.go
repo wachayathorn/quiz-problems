@@ -1,5 +1,7 @@
 package builder
 
+import "fmt"
+
 type HTTPRequest struct {
 	Method  string
 	URL     string
@@ -37,4 +39,16 @@ func (b *HTTPRequestBuilder) SetBody(body string) *HTTPRequestBuilder {
 
 func (b *HTTPRequestBuilder) Build() *HTTPRequest {
 	return &b.request
+}
+
+func main() {
+	builder := NewHTTPRequest()
+	builder.SetMethod("GET")
+	builder.SetURL("https://example.com")
+	builder.SetHeaders(map[string]string{
+		"Content-Type": "application/json",
+	})
+	builder.SetBody("{\"name\":\"John\",\"age\":30}")
+	request := builder.Build()
+	fmt.Println(request)
 }
