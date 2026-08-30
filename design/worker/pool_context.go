@@ -25,7 +25,7 @@ func RunPoolWithContext() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	jobs := make(chan job)
+	jobs := make(chan job, numJobs)
 	results := make(chan jobResult, numJobs)
 
 	var wg sync.WaitGroup
