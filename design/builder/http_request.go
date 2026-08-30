@@ -42,13 +42,13 @@ func (b *HTTPRequestBuilder) Build() *HTTPRequest {
 }
 
 func main() {
-	builder := NewHTTPRequest()
-	builder.SetMethod("GET")
-	builder.SetURL("https://example.com")
-	builder.SetHeaders(map[string]string{
-		"Content-Type": "application/json",
-	})
-	builder.SetBody("{\"name\":\"John\",\"age\":30}")
+	builder := NewHTTPRequest().
+		SetMethod("GET").
+		SetURL("https://example.com").
+		SetHeaders(map[string]string{
+			"Content-Type": "application/json",
+		}).
+		SetBody("{\"name\":\"John\",\"age\":30}")
 	request := builder.Build()
 	fmt.Println(request)
 }
