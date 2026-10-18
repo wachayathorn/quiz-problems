@@ -1043,16 +1043,16 @@ public class VideoQueryController {
 
 ### 12.10 Checklist ตอนเอาไปใช้จริง
 
-- [ ] Producer เขียน business row + outbox ใน transaction เดียว
-- [ ] Event `id` คงที่ตอน retry
-- [ ] Kafka key = entity ที่ต้องรักษาลำดับ (เช่น `videoId`)
-- [ ] แต่ละ consumer group ชื่อคงที่และไม่ปนกันโดยไม่ตั้งใจ
-- [ ] Consumer idempotent ด้วย `source:id`
-- [ ] มี DLQ + จำกัด retry สำหรับ poison message
-- [ ] ส่งต่อ `correlationId` ใน event และ MDC/log
-- [ ] Schema เพิ่ม field แบบ optional ก่อน แล้วค่อยบังคับใช้
-- [ ] หน้า UI รองรับสถานะ `PROCESSING` / eventual consistency
-- [ ] Query ที่ต้องคำตอบทันที ยังใช้ sync API
+- [x] Producer เขียน business row + outbox ใน transaction เดียว
+- [x] Event `id` คงที่ตอน retry
+- [x] Kafka key = entity ที่ต้องรักษาลำดับ (เช่น `videoId`)
+- [x] แต่ละ consumer group ชื่อคงที่และไม่ปนกันโดยไม่ตั้งใจ
+- [x] Consumer idempotent ด้วย `source:id`
+- [x] มี DLQ + จำกัด retry สำหรับ poison message
+- [x] ส่งต่อ `correlationId` ใน event และ MDC/log
+- [x] Schema เพิ่ม field แบบ optional ก่อน แล้วค่อยบังคับใช้
+- [x] หน้า UI รองรับสถานะ `PROCESSING` / eventual consistency
+- [x] Query ที่ต้องคำตอบทันที ยังใช้ sync API
 
 ---
 
